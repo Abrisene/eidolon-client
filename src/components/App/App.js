@@ -35,10 +35,10 @@ const Profile = () => <span>Profile</span>
 const About = () => <span>About</span>
 const Store = () => <span>Store</span>
 
-class App extends Component <{
+class App extends Component /* <{
   logo?: string,
   title?: string,
-}> {
+}>  */{
   render() {
     return (
       <ConfigHOC logo={logo} />
@@ -46,7 +46,7 @@ class App extends Component <{
   }
 }
 
-const ConfigHOC = (props: any) => {
+const ConfigHOC = (props) => {
   return (
     <Query query={queries.Q_APP_CONFIG}>
       {({ loading, error, data }) => {
@@ -59,7 +59,7 @@ const ConfigHOC = (props: any) => {
   );
 }
 
-const Layout = (props: any) => {
+const Layout = (props) => {
   return (
     <LayoutTopNav logo={props.logo} title={props.title} navLinks={links}>
       <Route path="/" exact component={Home} />
@@ -68,7 +68,7 @@ const Layout = (props: any) => {
       <Route path="/store" component={Store} />
     </LayoutTopNav>
   );
-}
+};
 
 /**
  # Module Exports

@@ -17,11 +17,11 @@ import './LayoutTopNav.css';
  # Component
  */
 
-class LayoutTopNav extends Component <{
+class LayoutTopNav extends Component /* <{
   logo?: string,
   title?: string,
   navLinks?: any,
-}> {
+}>  */{
   render() {
     const { logo, title, navLinks } = this.props;
     return (

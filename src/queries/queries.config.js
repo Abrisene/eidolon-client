@@ -15,6 +15,9 @@ import gql from "graphql-tag";
 
 const Q_APP_CONFIG = gql`
   {
+    currentUser {
+      emails
+    }
     appConfig {
       name
       env

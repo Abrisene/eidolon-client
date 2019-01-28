@@ -7,7 +7,7 @@
  # Module Imports
  */
 
-import React, { Component, ReactNode } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 
 import './Navbar.css';
@@ -16,7 +16,7 @@ import './Navbar.css';
  # Component
  */
 
-const NavBrand: React.SFC<{ logo?: string, title?: string }> = ({ logo, title }) => {
+const NavBrand /* React.SFC<{ logo?: string, title?: string }> */ = ({ logo, title }) => {
   return (
       <div className="col-sm-3 col-lg-2">
         <Link className="navbar-brand" to="/">
@@ -27,13 +27,13 @@ const NavBrand: React.SFC<{ logo?: string, title?: string }> = ({ logo, title })
   )
 };
 
-const NavList: React.SFC<{ navLinks?: Array<object> }> = ({ navLinks }) => {
+const NavList = ({ navLinks }) => {
   const links = navLinks || [];
   return (
     <div className="collapse navbar-collapse">
       <ul className="navbar-nav mr-auto">
         {
-          links.map((link: any, id: number) => {
+          links.map((link, id) => {
             return <NavLink to={link.to} key={id}>{link.name}</NavLink>
           })
         }
@@ -42,7 +42,7 @@ const NavList: React.SFC<{ navLinks?: Array<object> }> = ({ navLinks }) => {
   );
 }
 
-const NavLink: React.SFC<{ children?: ReactNode, to: string }> = ({ children, to }) => {
+const NavLink = ({ children, to }) => {
   return (
     <li className="nav-item">
       <Link to={to} className="nav-link">{children}</Link>
@@ -50,19 +50,7 @@ const NavLink: React.SFC<{ children?: ReactNode, to: string }> = ({ children, to
   );
 };
 
-const Navbar: React.SFC<{
-  children?: ReactNode,
-  navLinks?: Array<object>,
-  dark?: boolean,
-  expand?: string,
-  fixed?: boolean,
-  fixedTop?: boolean,
-  fixedBottom?: boolean,
-  title?: string,
-  logo?: string,
-  id?: string,
-  className?: string,
-}> = ({
+const Navbar = ({
   children,
   navLinks,
   dark,
