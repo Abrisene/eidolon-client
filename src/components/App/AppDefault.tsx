@@ -1,6 +1,19 @@
+/*
+ # AppDefault.tsx
+ # Default Create React App Component
+ */
+
+/**
+ # Module Imports
+ */
+
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+
+/**
+ # Component
+ */
 
 class App extends Component {
   render() {
@@ -24,5 +37,9 @@ class App extends Component {
     );
   }
 }
+
+/**
+ # Module Exports
+ */
 
 export default App;
