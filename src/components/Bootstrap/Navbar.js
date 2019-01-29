@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink as RouterNavLink } from "react-router-dom";
 
 import './Navbar.css';
 
@@ -45,7 +45,7 @@ const NavList = ({ navLinks }) => {
 const NavLink = ({ children, to }) => {
   return (
     <li className="nav-item">
-      <Link to={to} className="nav-link">{children}</Link>
+      <RouterNavLink to={to} className="nav-link">{children}</RouterNavLink>
     </li>
   );
 };

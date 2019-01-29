@@ -17,6 +17,7 @@ const Q_APP_CONFIG = gql`
   {
     currentUser {
       emails
+      roles
     }
     appConfig {
       name
