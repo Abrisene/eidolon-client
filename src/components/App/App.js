@@ -13,6 +13,7 @@ import { Query } from "react-apollo";
 
 import queries from '../../queries';
 
+import { ViewAuth, ViewRecover } from '../Views';
 import { Navbar, Button } from '../Bootstrap';
 import { AuthVisible } from '../Auth';
 
@@ -37,13 +38,11 @@ const Profile = () => <span>Profile</span>
 const About = () => <span>About</span>
 const Store = () => <span>Store</span>
 const Admin = () => <span>Admin</span>
-const Login = () => <span>Login</span>
-const Register = () => <span>Register</span>
 
 class App extends Component {
   render() {
     return (
-      <ConfigHOC logo={logo} />
+      <ConfigHOC />
     );
   };
 };
@@ -52,16 +51,15 @@ const ConfigHOC = (props) => {
   return (
     <Query query={queries.Q_APP_CONFIG}>
       {({ loading, error, data }) => {
-        console.log(loading, error, data);
-        if (loading) return <Layout title="x" logo={logo} />
-        if (error) return <Layout title="x" logo={logo} />
-        return <Layout title={data.appConfig.name || 'x'} logo={logo} config={data.appConfig} user={data.currentUser} />
+        if (loading) return <Layout />
+        if (error) return <Layout />
+        return <Layout config={data.appConfig} user={data.currentUser} />
       }}
     </Query>
   );
 };
 
-const AppNavbar = ({ children, title, logo, navLinks, config, user }) => {
+const AppNavbar = ({ children, title, logo, navLinks, user }) => {
   const filterLinks = navLinks.filter(l => user ? (l.visible === 'auth' || l.roles !== undefined) : (l.visible === 'noauth' || (!l.visible && !l.roles)));
   return (
     <Navbar dark fixed logo={logo} title={title} navLinks={filterLinks} >
@@ -70,22 +68,24 @@ const AppNavbar = ({ children, title, logo, navLinks, config, user }) => {
   );
 };
 
-const Layout = ({ title, logo, config, user }) => {
+const Layout = ({ config, user }) => {
+  const title = config ? config.name : undefined;
   return (
-    <div className="layout">
+    <div className="app--layout">
       <AppNavbar title={title} logo={logo} config={config} user={user} navLinks={links}>
         <AuthVisible hide>
           <Button className="mr-2" link to='/login'>Log In</Button>
           <Button outline warning to='/register'>Register</Button>
         </AuthVisible>
       </AppNavbar>
-      <main>
+      <main id="app--main" className="app--main">
         <div className="container">
           <Route path="/" component={Home} exact />
           <AuthVisible hide>
             <Route path="/about" component={About} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
+            <Route path="/login" render={() => <ViewAuth type="login" />} />
+            <Route path="/register" render={() => <ViewAuth type="register" />} />
+            <Route path="/recover" render={() => <ViewRecover type="register" />} />
           </AuthVisible>
           <AuthVisible>
             <Route path="/profile" component={Profile} />

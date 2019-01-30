@@ -1,5 +1,5 @@
 /*
- # Bootstrap/Navbar.tsx
+ # Bootstrap/Navbar.js
  # React Component Index
  */
 
@@ -16,12 +16,12 @@ import './Navbar.css';
  # Component
  */
 
-const NavBrand /* React.SFC<{ logo?: string, title?: string }> */ = ({ logo, title }) => {
+const NavBrand = ({ logo, title }) => {
   return (
       <div className="col-sm-3 col-lg-2">
         <Link className="navbar-brand" to="/">
-          { logo ? <img src={logo} className="brand-logo" alt="logo" /> : '' }
-          <span>{title ? title : ''}</span>
+          { logo ? <img src={logo} className="brand-logo" alt="logo" /> : null }
+          { title ? <span>{title}</span> : <span>&nbsp;</span> }
         </Link>
       </div>
   )
@@ -69,12 +69,12 @@ const Navbar = ({
   if (expand) classes += ' navbar-expand-md';
   if (fixed || fixedTop) classes += ' fixed-top';
   if (fixedBottom) classes += ' fixed-bottom';
-  if (classes) classes += ` ${className}`;
+  if (className) classes += ` ${className}`;
 
   return (
     <nav className={classes} id={id}>
-      <NavBrand logo={logo} title={title} />
-      {navLinks ? <NavList navLinks={navLinks} /> : ''}
+      {(title || logo) ? <NavBrand logo={logo} title={title} /> : null }
+      {navLinks ? <NavList navLinks={navLinks} /> : null }
       {children}
     </nav>
   );

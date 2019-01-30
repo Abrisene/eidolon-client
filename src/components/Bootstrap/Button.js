@@ -38,12 +38,17 @@ const Button = ({
   to,
   replace,
   innerRef,
+  onClick,
 }) => {
+  const handleClick = !onClick ? undefined : (e) => {
+    e.preventDefault();
+    onClick(e);
+  };
+
   let classes = 'btn';
   let themeColor = 'primary';
 
   if (block) classes += ' btn-block';
-  // if (outline) classes += ' btn-outline';
   if (large) classes += ' btn-large';
   if (small) classes += ' btn-small';
 
@@ -61,11 +66,9 @@ const Button = ({
   classes += ` btn-${outline ? 'outline-' : ''}${themeColor}`;
 
   if (className) classes += ` ${className}`;
-
-  console.log(classes);
   
-  return !to ? <button id={id} className={classes} active={active} disabled={disabled}>{children}</button> : 
-               <Link to={to} id={id} className={classes} active={active} disabled={disabled} replace={replace} innerRef={innerRef} >{children}</Link>
+  return !to ? <button id={id} className={classes} active={active} disabled={disabled} onClick={handleClick}>{children}</button> : 
+               <Link to={to} id={id} className={classes} active={active} disabled={disabled} replace={replace} innerRef={innerRef} onClick={handleClick}>{children}</Link>
 };
 
 /**
