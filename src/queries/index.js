@@ -1,5 +1,5 @@
 /*
- # queries/index.tsx
+ # queries/index.js
  # GraphQL Query Index
  */
 
@@ -8,6 +8,7 @@
  */
 
 import configQueries from './queries.config';
+import userQueries from './queries.user';
 
 /**
  # Module Exports
@@ -15,4 +16,5 @@ import configQueries from './queries.config';
 
  export default {
    ...configQueries,
- }
+   ...userQueries,
+ };

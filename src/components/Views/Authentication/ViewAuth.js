@@ -8,7 +8,10 @@
  */
 
 import React from 'react';
+import { Mutation } from 'react-apollo';
 // import { Link } from "react-router-dom";
+
+import queries from '../../../queries';
 
 import AuthSocial from './AuthSocial';
 import AuthEmail from './AuthEmail';
@@ -42,7 +45,14 @@ const ViewAuth = ({ id, className, type = 'login' }) => {
         </div>
         <div className="col-md-8 mb-4">
           <div className="row ml-2">
-            <AuthEmail type={type} />
+            <Mutation mutation={queries.M_USER_AUTH_EMAIL}>
+              {
+                (authenticateEmail, { data }) => (
+                  <AuthEmail type={type} onSubmit={(input) => authenticateEmail({ variables: input })} />
+                )
+              }
+              
+            </Mutation>
           </div>
         </div>
       </div>

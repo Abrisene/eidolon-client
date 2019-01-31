@@ -1,5 +1,5 @@
 /*
- # queries.config.tsx
+ # queries.config.js
  # Config Queries
  */
 
@@ -7,7 +7,7 @@
  # Module Imports
  */
 
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 /**
  # Queries

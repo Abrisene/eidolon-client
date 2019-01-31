@@ -11,7 +11,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 // import { Query } from "react-apollo";
 
-// import queries from '../../../queries';
+
 
 import { Button, Input } from '../../Bootstrap';
 
@@ -37,11 +37,16 @@ class AuthForm extends Component {
   }
 
   handleSubmit() {
-
+    const { type, onSubmit } = this.props;
+    const { email, password } = this.state;
+    const register = type === 'register';
+    if (onSubmit) onSubmit({ email, password, register });
+    console.log('submit', this.state.email, this.state.password, register);
   }
 
   render() {
     const { type } = this.props;
+    const register = type === 'register';
     let buttonText;
 
     if (type === 'login') {
@@ -58,7 +63,7 @@ class AuthForm extends Component {
             type="email"
             label="Email"
             placeholder="Email"
-            help="We'll never share your email."
+            help={register ? "We'll never share your email." : undefined}
             onChange={(v) => this.handleChange('email', v)}
             validate
           />
@@ -69,10 +74,10 @@ class AuthForm extends Component {
             placeholder="Password"
             onChange={(v) => this.handleChange('password', v)}
           />
-          <Button>{buttonText}</Button>
+          <Button onClick={() => this.handleSubmit()}>{buttonText}</Button>
           {
-            type === 'login' ? <small className="col"><Link to="/recover">Forgot Password?</Link></small> : 
-                               null
+            !register ? <small className="col"><Link to="/recover">Forgot Password?</Link></small> : 
+                        null
           }
         </form>
       </div>

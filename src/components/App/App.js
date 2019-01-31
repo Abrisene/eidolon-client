@@ -51,6 +51,7 @@ const ConfigHOC = (props) => {
   return (
     <Query query={queries.Q_APP_CONFIG}>
       {({ loading, error, data }) => {
+        console.log(data);
         if (loading) return <Layout />
         if (error) return <Layout />
         return <Layout config={data.appConfig} user={data.currentUser} />
