@@ -29,6 +29,15 @@ import gql from 'graphql-tag';
   }
 `; */
 
+const Q_USER_CURRENT = gql`
+{
+  currentUser {
+    emails
+    roles
+  }
+}
+`;
+
 /**
  # Mutations
  */
@@ -46,5 +55,6 @@ const M_USER_AUTH_EMAIL = gql`
  */
 
 export default {
+  Q_USER_CURRENT,
   M_USER_AUTH_EMAIL,
 };

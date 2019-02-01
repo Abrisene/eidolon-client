@@ -74,7 +74,7 @@ const Layout = ({ config, user }) => {
   return (
     <div className="app--layout">
       <AppNavbar title={title} logo={logo} config={config} user={user} navLinks={links}>
-        <AuthVisible hide>
+        <AuthVisible user={user} hide>
           <Button className="mr-2" link to='/login'>Log In</Button>
           <Button outline warning to='/register'>Register</Button>
         </AuthVisible>
