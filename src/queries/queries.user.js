@@ -49,6 +49,11 @@ const M_USER_AUTH_EMAIL = gql`
     }
   }
 `
+const M_USER_LOGOUT = gql`
+  mutation Logout {
+    logout
+  }
+`;
 
 /**
  # Module Exports
@@ -57,4 +62,5 @@ const M_USER_AUTH_EMAIL = gql`
 export default {
   Q_USER_CURRENT,
   M_USER_AUTH_EMAIL,
+  M_USER_LOGOUT,
 };

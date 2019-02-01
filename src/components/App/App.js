@@ -9,7 +9,7 @@
 
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
-import { Query } from "react-apollo";
+import { Query, Mutation } from "react-apollo";
 
 import queries from '../../queries';
 
@@ -69,7 +69,7 @@ const AppNavbar = ({ children, title, logo, navLinks, user }) => {
   );
 };
 
-const Layout = ({ config, user }) => {
+const Layout = ({ config, user = null }) => {
   const title = config ? config.name : undefined;
   return (
     <div className="app--layout">
@@ -78,21 +78,32 @@ const Layout = ({ config, user }) => {
           <Button className="mr-2" link to='/login'>Log In</Button>
           <Button outline warning to='/register'>Register</Button>
         </AuthVisible>
+        <AuthVisible user={user}>
+          <Mutation
+            mutation={queries.M_USER_LOGOUT}
+            refetchQueries={[{ query: queries.Q_USER_CURRENT }]}
+          >
+            {
+              (userLogout, _) => <Button onClick={() => userLogout()} outline danger>Logout</Button>
+            }
+          </Mutation>
+        </AuthVisible>
       </AppNavbar>
       <main id="app--main" className="app--main">
         <div className="container">
+          {user ? user.emails[0] : null}
           <Route path="/" component={Home} exact />
-          <AuthVisible hide>
+          <AuthVisible user={user} hide>
             <Route path="/about" component={About} />
             <Route path="/login" render={() => <ViewAuth type="login" />} />
             <Route path="/register" render={() => <ViewAuth type="register" />} />
             <Route path="/recover" render={() => <ViewRecover type="register" />} />
           </AuthVisible>
-          <AuthVisible>
+          <AuthVisible user={user}>
             <Route path="/profile" component={Profile} />
             <Route path="/store" component={Store} />
           </AuthVisible>
-          <AuthVisible>
+          <AuthVisible user={user}>
             <Route path="/admin" component={Admin} />
           </AuthVisible>
         </div>
