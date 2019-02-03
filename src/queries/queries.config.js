@@ -23,6 +23,8 @@ const Q_APP_CONFIG = gql`
       name
       env
       keys {
+        google
+        facebook
         stripe
       }
     }

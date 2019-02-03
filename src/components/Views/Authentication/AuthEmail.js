@@ -9,8 +9,9 @@
 
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-// import { Query } from "react-apollo";
+import { Mutation } from 'react-apollo';
 
+import queries from '../../../queries';
 
 
 import { Button, Input } from '../../Bootstrap';
@@ -36,12 +37,11 @@ class AuthForm extends Component {
     this.setState(() => ({ [key]: value }));
   }
 
-  handleSubmit() {
-    const { type, onSubmit } = this.props;
+  handleSubmit(onSubmit) {
+    const { type } = this.props;
     const { email, password } = this.state;
     const register = type === 'register';
     if (onSubmit) onSubmit({ email, password, register });
-    console.log('submit', this.state.email, this.state.password, register);
   }
 
   render() {
@@ -56,31 +56,35 @@ class AuthForm extends Component {
     }
 
     return (
-      <div id="c-pane-auth-email" className="col-md-12">
-        <form>
-          <Input
-            id="f-input-email"
-            type="email"
-            label="Email"
-            placeholder="Email"
-            help={register ? "We'll never share your email." : undefined}
-            onChange={(v) => this.handleChange('email', v)}
-            validate
-          />
-          <Input
-            id="f-input-password"
-            type="password"
-            label="Password"
-            placeholder="Password"
-            onChange={(v) => this.handleChange('password', v)}
-          />
-          <Button onClick={() => this.handleSubmit()}>{buttonText}</Button>
-          {
-            !register ? <small className="col"><Link to="/recover">Forgot Password?</Link></small> : 
-                        null
-          }
-        </form>
-      </div>
+      <Mutation mutation={queries.M_USER_AUTH_EMAIL} refetchQueries={[{ query: queries.Q_USER_CURRENT }]}>
+        {(authenticateEmail, { data }) => (
+          <div id="c-pane-auth-email" className="col-md-12">
+            <form>
+              <Input
+                id="f-input-email"
+                type="email"
+                label="Email"
+                placeholder="Email"
+                help={register ? "We'll never share your email." : undefined}
+                onChange={(v) => this.handleChange('email', v)}
+                validate
+              />
+              <Input
+                id="f-input-password"
+                type="password"
+                label="Password"
+                placeholder="Password"
+                onChange={(v) => this.handleChange('password', v)}
+              />
+              <Button onClick={() => this.handleSubmit((input) => authenticateEmail({ variables: { input }}))}>{buttonText}</Button>
+              {
+                !register ? <small className="col"><Link to="/recover">Forgot Password?</Link></small> :
+                  null
+              }
+            </form>
+          </div>
+        )}
+      </Mutation>
     );
   }
 }

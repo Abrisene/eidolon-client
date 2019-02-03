@@ -13,4 +13,4 @@ import AuthVisible from './AuthVisible';
  # Module Exports
  */
 
-export { AuthVisible }
+export { AuthVisible };

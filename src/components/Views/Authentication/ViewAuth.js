@@ -8,10 +8,6 @@
  */
 
 import React from 'react';
-import { Mutation } from 'react-apollo';
-import { Redirect } from "react-router-dom";
-
-import queries from '../../../queries';
 
 import AuthSocial from './AuthSocial';
 import AuthEmail from './AuthEmail';
@@ -20,7 +16,7 @@ import AuthEmail from './AuthEmail';
  # Component
  */
 
-const ViewAuth = ({ id, className, type = 'login' }) => {
+const ViewAuth = ({ id, className, type = 'login', user, config }) => {
   const i = id || `c-view--${type}`;
   const classes = className || `c-view--${type}`;
   let titleText;
@@ -41,24 +37,11 @@ const ViewAuth = ({ id, className, type = 'login' }) => {
       <div className="row mt-4">
         <div className="col-md-4 mb-4 border-right">
           <div className="mt-5" />
-          <AuthSocial />
+          <AuthSocial config={config} />
         </div>
         <div className="col-md-8 mb-4">
           <div className="row ml-2">
-            <Mutation 
-              mutation={queries.M_USER_AUTH_EMAIL}
-              refetchQueries={[{ query: queries.Q_USER_CURRENT }]}
-            >
-              {
-                (authenticateEmail, { data }) => {
-                  console.log(data);
-                  return (
-                    <AuthEmail type={type} onSubmit={(input) => authenticateEmail({ variables: input })} />
-                  )
-                }
-              }
-              
-            </Mutation>
+            <AuthEmail config={config} type={type} />
           </div>
         </div>
       </div>
