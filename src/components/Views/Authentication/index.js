@@ -1,6 +1,6 @@
 /*
- # Bootstrap/index.js
- # Bootstrap Component Index
+ # Authentication/index.js
+ # Authentication View Component Index
  */
 
 /**
@@ -9,7 +9,6 @@
 
 import ViewAuth from './ViewAuth';
 import ViewRecover from './ViewRecover';
-// import Button from './Button';
 
 /**
  # Module Exports

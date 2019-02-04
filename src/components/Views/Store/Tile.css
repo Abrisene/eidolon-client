@@ -1,0 +1,13 @@
+.c-tile {
+   background: #999;
+   /* border-radius: 4px; */
+   padding: 1rem 1.25rem;
+   min-width: 25%;
+   /* min-height: 50%;
+   max-height: 50%; */
+
+   padding-bottom: 50%;
+   background-size: 100%;
+   /* background-image: url('https://cdna.artstation.com/p/assets/images/images/015/616/628/large/marcin-jakubowski-smallfoot-outerworld.jpg?1548974655'); */
+   background-image: url('https://cdna.artstation.com/p/assets/images/images/015/623/224/large/karl-lindberg-03-mummy-03.jpg?1549000953');
+}

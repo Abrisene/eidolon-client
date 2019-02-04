@@ -6,7 +6,7 @@
 // Customizations Here
 
 /* remove rounding from cards, buttons and inputs */
-.card, .btn, .form-control { border-radius: 1px; }
+.card, .btn, .form-control { border-radius: 0.12rem !important; }
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss';

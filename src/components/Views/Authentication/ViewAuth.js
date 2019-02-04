@@ -12,11 +12,13 @@ import React from 'react';
 import AuthSocial from './AuthSocial';
 import AuthEmail from './AuthEmail';
 
+import { Container } from '../../Bootstrap';
+
 /**
  # Component
  */
 
-const ViewAuth = ({ id, className, type = 'login', user, config }) => {
+const ViewAuth = ({ id, className, type = 'login', keys }) => {
   const i = id || `c-view--${type}`;
   const classes = className || `c-view--${type}`;
   let titleText;
@@ -28,7 +30,7 @@ const ViewAuth = ({ id, className, type = 'login', user, config }) => {
   }
 
   return (
-    <div id={i} className={classes}>
+    <Container id={i} className={classes}>
       <div className="row mt-5">
         <div className="col-md-12">
           <h4 className="lead ml-4">{titleText}</h4>
@@ -37,15 +39,15 @@ const ViewAuth = ({ id, className, type = 'login', user, config }) => {
       <div className="row mt-4">
         <div className="col-md-4 mb-4 border-right">
           <div className="mt-5" />
-          <AuthSocial config={config} />
+          <AuthSocial keys={keys} />
         </div>
         <div className="col-md-8 mb-4">
           <div className="row ml-2">
-            <AuthEmail config={config} type={type} />
+            <AuthEmail type={type} />
           </div>
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

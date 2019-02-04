@@ -1,5 +1,5 @@
 /*
- # Layouts/index.tsx
+ # Layouts/index.js
  # Layout Component Index
  */
 
@@ -7,10 +7,22 @@
  # Module Imports
  */
 
-import LayoutTopNav from './LayoutTopNav';
+// import * as Nav from './Nav';
+// import * as Hero from './ContainerHero';
+
+import { LayoutTopNav } from './Nav';
+import { ContainerHero} from './Hero';
 
 /**
  # Module Exports
  */
 
-export { LayoutTopNav }
+/* export default {
+  ...Nav,
+  ...Hero,
+}; */
+
+export {
+  LayoutTopNav,
+  ContainerHero,
+}

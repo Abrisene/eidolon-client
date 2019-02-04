@@ -48,6 +48,7 @@ class Input extends Component {
   render() {
     const { id, type, label, placeholder, help } = this.props;
     let classes = 'form-control';
+    if (this.props.className) classes += 'hidden';
     if (this.props.className) classes += ` ${this.props.className}`;
     return (
       <div className="form-group">

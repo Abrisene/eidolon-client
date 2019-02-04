@@ -8,16 +8,14 @@
  */
 
 import React from 'react';
-// import { Link } from "react-router-dom";
 
-// import AuthSocial from './AuthSocial';
 import AuthRecover from './AuthRecover';
 
 /**
  # Component
  */
 
-const ViewAuth = ({ id, className, type = 'password' }) => {
+const ViewRecover = ({ id, className, type = 'password' }) => {
   const i = id || `c-view--recover`;
   const classes = className || `c-view--recover`;
   return (
@@ -48,4 +46,4 @@ const ViewAuth = ({ id, className, type = 'password' }) => {
  # Module Exports
  */
 
-export default ViewAuth;
+export default ViewRecover;

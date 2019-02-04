@@ -20,6 +20,7 @@ const Button = ({
   children,
   className,
   id,
+  hidden,
   active,
   disabled,
   block,
@@ -48,6 +49,10 @@ const Button = ({
   let classes = 'btn';
   let themeColor = 'primary';
 
+  // Get Hidden
+  if (hidden) classes += 'hidden';
+
+  // Button Styling
   if (block) classes += ' btn-block';
   if (large) classes += ' btn-large';
   if (small) classes += ' btn-small';
@@ -68,7 +73,7 @@ const Button = ({
   if (className) classes += ` ${className}`;
   
   return !to ? <button id={id} className={classes} active={active} disabled={disabled} onClick={handleClick}>{children}</button> : 
-               <Link to={to} id={id} className={classes} active={active} disabled={disabled} replace={replace} innerRef={innerRef} onClick={handleClick}>{children}</Link>
+               <Link to={to} id={id} className={classes} active={active} disabled={disabled} replace={replace} innerref={innerRef} onClick={handleClick}>{children}</Link>
 };
 
 /**

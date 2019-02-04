@@ -18,7 +18,7 @@ import './Navbar.css';
 
 const NavBrand = ({ logo, title }) => {
   return (
-      <div className="col-sm-3 col-lg-2">
+      <div className="col-3 col-lg-2">
         <Link className="navbar-brand" to="/">
           { logo ? <img src={logo} className="brand-logo" alt="logo" /> : null }
           { title ? <span>{title}</span> : <span>&nbsp;</span> }

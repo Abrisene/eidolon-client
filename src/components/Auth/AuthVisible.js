@@ -17,7 +17,7 @@ const AuthVisible = ({ children, roles, user, unauthorized, hide }) => {
   const checkRoles = typeof roles === 'string' ? [roles] : roles;
   let valid = (user !== null && roles === undefined) ? true : false;
   if (!valid && user && checkRoles !== undefined) {
-    roles.some((role) => {
+    checkRoles.some((role) => {
       if (user.roles.includes(role)) valid = true;
       return valid;
     });

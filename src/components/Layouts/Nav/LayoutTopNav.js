@@ -1,5 +1,5 @@
 /*
- # LayoutTopNav.tsx
+ # LayoutTopNav.js
  # Top Navbar Layout
  */
 
@@ -9,7 +9,7 @@
 
 import React, { Component } from 'react';
 
-import { Navbar } from '../Bootstrap';
+import { Navbar } from '../../Bootstrap';
 
 import './LayoutTopNav.css';
 
@@ -17,11 +17,7 @@ import './LayoutTopNav.css';
  # Component
  */
 
-class LayoutTopNav extends Component /* <{
-  logo?: string,
-  title?: string,
-  navLinks?: any,
-}>  */{
+class LayoutTopNav extends Component {
   render() {
     const { logo, title, navLinks } = this.props;
     return (
