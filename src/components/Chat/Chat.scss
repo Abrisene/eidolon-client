@@ -1,0 +1,14 @@
+.c--chat-input {
+  input {
+    // background-color:red;
+  }
+}
+
+.c--chat-window {
+
+  ul {
+    min-height: 20vh;
+    max-height: 20vh;
+    overflow: scroll;
+  }
+}

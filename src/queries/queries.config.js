@@ -15,11 +15,11 @@ import gql from 'graphql-tag';
 
 const Q_APP_CONFIG = gql`
   {
-    currentUser {
+    user: currentUser {
       emails
       roles
     }
-    appConfig {
+    config: appConfig {
       name
       env
       keys {

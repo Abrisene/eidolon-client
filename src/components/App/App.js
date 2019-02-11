@@ -7,95 +7,53 @@
  # Module Imports
  */
 
-import React, { Component } from 'react';
+import React, { Suspense } from 'react';
 import { Route } from "react-router-dom";
-import { Query, Mutation } from "react-apollo";
+import { useQuery } from 'react-apollo-hooks';
 
 import queries from '../../queries';
 
-import { ViewAuth, ViewRecover, ViewStore } from '../Views';
-import { Container, Navbar, Button } from '../Bootstrap';
+import { ViewAuth, ViewRecover, ViewStore, ViewChat } from '../Views';
 import { AuthVisible } from '../Auth';
 
-import logo from './logo.svg';
-import './App.css';
+import AppNavbar from './AppNavbar';
 
-// console.log(queries);
+import logo from './logo.svg';
 
 /**
- # Component
+ # Constants
  */
 
 const links = [
   { to: '/about', name: 'About', visible: 'noauth' },
   { to: '/profile', name: 'Profile', visible: 'auth' },
   { to: '/store', name: 'Store', visible: 'auth' },
+  { to: '/chat', name: 'Chat', visible: 'auth' },
+  { to: '/studio', name: 'Studio', roles: ['admin'] },
   { to: '/admin', name: 'Admin', roles: ['admin'] }
 ];
 
+/**
+ # Mock Components
+ */
+
 const Home = () => <span>Home</span>
-const Profile = () => <span>Profile</span>
 const About = () => <span>About</span>
-// const Store = () => <span>Store</span>
+const Profile = () => <span>Profile</span>
+const Studio = () => <span>Studio</span>
 const Admin = () => <span>Admin</span>
 
-class App extends Component {
-  render() {
-    return (
-      <Query query={queries.Q_APP_CONFIG}>
-        {({ loading, error, data }) => {
-          // console.log(data);
-          if (loading) return <Layout />
-          if (error) return <Layout />
-          const { appConfig, currentUser } = data;
-          console.log(data);
-          return <Layout config={appConfig} keys={appConfig.keys} user={currentUser} />
-        }}
-      </Query>
-    );
-  };
-};
+/**
+ # Component
+ */
 
-const AppNavbar = ({ children, title, logo, navLinks, user }) => {
-  const filterLinks = navLinks.filter((l) => {
-    const authValid = !l.visible || (user && l.visible === 'auth') || (!user && l.visible === 'noauth');
-    let roleValid = false;
-    if (user) roleValid = !l.roles || l.roles.reduce((valid, role) => (valid || user.roles.includes(role)), false);
-
-    return authValid && roleValid;
-  });
+const App = () => {
+  const { data, error } = useQuery(queries.Q_APP_CONFIG);
+  if (error) return <div>`Error: ${error.message}`</div>
   return (
-    <Navbar dark fixed logo={logo} title={title} navLinks={filterLinks} >
-      {children}
-    </Navbar>
-  );
-};
-
-const NavAuth = ({ user }) => {
-  return (
-    <div>
-      <AuthVisible user={user} hide>
-        <Button className="mr-2" link to='/login'>Sign In</Button>
-        <Button outline warning to='/register'>Register</Button>
-      </AuthVisible>
-      <AuthVisible user={user}>
-        <ButtonLogout />
-      </AuthVisible>
-    </div>
-  );
-};
-
-const ButtonLogout = (children, ...props) => {
-  return (
-    <Mutation mutation={queries.M_USER_LOGOUT} refetchQueries={[{ query: queries.Q_USER_CURRENT }]}>
-      {(userLogout, _) => {
-        return (
-          <Button onClick={() => userLogout()} outline danger {...props}>
-            {props.children ? { children } : 'Logout'}
-          </Button>
-        )
-      }}
-    </Mutation>
+    <Suspense fallback={<div>Loading</div>}>
+      <Layout {...data} />
+    </Suspense>
   );
 };
 
@@ -104,10 +62,9 @@ const Layout = ({ config = null, user = null, keys = null }) => {
   return (
     <div className="app--layout">
       <AppNavbar title={title} logo={logo} config={config} user={user} navLinks={links}>
-        <NavAuth user={user} />
       </AppNavbar>
       <main id="app--main" className="app--main">
-        <Routes config={config} user={user} keys={keys} />
+        <Routes config={config} user={user} keys={config.keys} />
       </main>
     </div>
   );
@@ -126,8 +83,10 @@ const Routes = ({ config = null, user = null, keys = null }) => {
       <AuthVisible user={user}>
         <Route path="/profile" component={Profile} />
         <Route path="/store" render={() => <ViewStore config={config} />} />
+        <Route path="/chat" render={() => <ViewChat config={config} user={user} />} />
       </AuthVisible>
       <AuthVisible user={user} roles="admin">
+        <Route path="/studio" component={Studio} />
         <Route path="/admin" component={Admin} />
       </AuthVisible>
     </div>

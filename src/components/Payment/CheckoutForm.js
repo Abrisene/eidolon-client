@@ -15,6 +15,9 @@ import {
   PostalCodeElement,
   injectStripe,
 } from 'react-stripe-elements';
+import { Mutation } from 'react-apollo';
+
+import queries from '../../queries';
 
 import { Button, Input } from '../Bootstrap';
 
@@ -26,16 +29,27 @@ import './Store.css';
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
-    this.submit = this.submit.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  async submit(ev) {
-    const { stripe } = this.props;
-    const { createToken } = stripe;
+  async handleSubmit(ev, onSubmit) {
+    const { stripe, sku } = this.props;
+    const { createToken, createSource } = stripe;
     ev.preventDefault();
 
     const token = await createToken();
+    const source = await createSource({ type: 'card' });
     console.log(token);
+    console.log(source);
+    // authenticateEmail({ variables: { input }}))
+    const input = {
+      token: token.token.id,
+      sku: sku.id,
+      provider: 'stripe',
+      retainSource: false,
+    };
+    console.log(input);
+    if (onSubmit) onSubmit({ variables: { input }});
         // However, this line of code will do the same thing:
     //
     // this.props.stripe.createToken({type: 'card', name: 'Jenny Rosen'});
@@ -49,27 +63,36 @@ class CheckoutForm extends Component {
   }
 
   render() {
+    const { className, amount, buttonText } = this.props;
+    const amountText = amount ? ` $${amount / 100}` : '';
+    const submitText = buttonText || `Send${amountText}`;
+    let  classes = `c-checkout col p-4`;
+    if (className) classes += ` ${className}`;
+    console.log(queries.M_STORE_PURCHASE);
+
     return (
-      <div className="c-checkout col bg-light p-4"> 
-        <div className="row">
-          <div className="col-9 mt-3">
-            {/* <CardElement /> */}
-            <label>Card Number</label>
-            <CardNumberElement />
-          </div>
-          <div className="col-3 mt-3">
-            <label>Expiration</label>
-            <CardExpiryElement />
-          </div>
-          <div className="col-4 mt-3">
-            <label>CVC</label>
-            <CardCVCElement />
-          </div>
-          <div className="col-4 mt-3">
-            <label>Postal Code</label>
-            <PostalCodeElement />
-          </div>
-          {/* <div className="col-4 mt-3">
+      <Mutation mutation={queries.M_STORE_PURCHASE}>
+        {(purchase, { data }) => (
+          <div className={classes}>
+            <div className="row">
+              <div className="col-12 mt-3">
+                {/* <CardElement /> */}
+                <label>Card Number</label>
+                <CardNumberElement />
+              </div>
+              <div className="col-4 mt-3">
+                <label>Expiration</label>
+                <CardExpiryElement />
+              </div>
+              <div className="col-4 mt-3">
+                <label>CVC</label>
+                <CardCVCElement />
+              </div>
+              <div className="col-4 mt-3">
+                <label>Postal Code</label>
+                <PostalCodeElement />
+              </div>
+              {/* <div className="col-4 mt-3">
             <div className="btn-group-toggle outline mt-5 offset-3" data-toggle="buttons">
               <label className="btn btn-primary outline active">
                 <input type="checkbox" checked autocomplete="off" />
@@ -77,18 +100,20 @@ class CheckoutForm extends Component {
               </label>
             </div>
           </div> */}
-        </div>
-        <div className="row mt-3" >
-          <div className="col-md-12">
-            <Button large block outline onClick={this.submit}>Send</Button>
+            </div>
+            <div className="row mt-5" >
+              <div className="col-md-12">
+                <Button large block outline onClick={(e) => this.handleSubmit(e, purchase)}>{submitText}</Button>
+              </div>
+
+            </div>
+            <div className="row mt-2">
+
+            </div>
+
           </div>
-
-        </div>
-        <div className="row mt-2">
-
-        </div>
-        
-      </div>
+        )}
+      </Mutation>
     );
   }
 }

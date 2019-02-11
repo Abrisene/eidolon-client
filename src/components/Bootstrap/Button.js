@@ -26,7 +26,9 @@ const Button = ({
   block,
   outline,
   large,
+  lg,
   small,
+  sm,
   primary,
   secondary,
   success,
@@ -40,10 +42,13 @@ const Button = ({
   replace,
   innerRef,
   onClick,
+  onSubmit,
+  ...props,
 }) => {
-  const handleClick = !onClick ? undefined : (e) => {
+  const handleClick = !onClick && !onSubmit ? undefined : (e) => {
     e.preventDefault();
-    onClick(e);
+    if (onClick) onClick(e);
+    if (onSubmit) onSubmit(e);
   };
 
   let classes = 'btn';
@@ -54,8 +59,8 @@ const Button = ({
 
   // Button Styling
   if (block) classes += ' btn-block';
-  if (large) classes += ' btn-large';
-  if (small) classes += ' btn-small';
+  if (large || lg) classes += ' btn-lg';
+  if (small || sm) classes += ' btn-sm';
 
   // Get Theme Color
   if (primary) themeColor = 'primary';
@@ -72,7 +77,7 @@ const Button = ({
 
   if (className) classes += ` ${className}`;
   
-  return !to ? <button id={id} className={classes} active={active} disabled={disabled} onClick={handleClick}>{children}</button> : 
+  return !to ? <button id={id} className={classes} active={active} disabled={disabled} onClick={handleClick} onSubmit={handleClick}>{children}</button> : 
                <Link to={to} id={id} className={classes} active={active} disabled={disabled} replace={replace} innerref={innerRef} onClick={handleClick}>{children}</Link>
 };
 

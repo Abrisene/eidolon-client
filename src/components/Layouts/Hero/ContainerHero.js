@@ -24,6 +24,8 @@ const ContainerHero = ({
   style,
   minHeight,
   maxHeight,
+  offsetTop,
+  offsetBottom,
   img,
   gradient,
   ...props,
@@ -34,8 +36,10 @@ const ContainerHero = ({
   if (img) styles.backgroundImage = `url(${img})`;
   if (minHeight) styles.minHeight = minHeight;
   if (maxHeight) styles.maxHeight = maxHeight;
+  if (offsetTop) styles.paddingTop = offsetTop;
+  if (offsetBottom) styles.paddingBottom = offsetBottom;
 
-  let classes = 'c--container-hero';
+  let classes = 'c--container c--container-hero';
 
   if (className) classes += ` ${className}`;
 

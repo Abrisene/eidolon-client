@@ -12,6 +12,7 @@ import * as ViewStore from './Store'; */
 
 import { ViewAuth, ViewRecover } from './Authentication';
 import { ViewStore } from './Store';
+import { ViewChat } from './Chat';
 
 /**
  # Module Exports
@@ -27,4 +28,5 @@ export {
   ViewAuth,
   ViewRecover,
   ViewStore,
+  ViewChat,
 };

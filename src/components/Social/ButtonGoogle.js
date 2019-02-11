@@ -16,6 +16,7 @@ import { Button } from '../Bootstrap';
  */
 
 const ButtonGoogle = ({ children, ...props}) => {
+  console.log(props);
   return (
     <GoogleLogin
       render={r => (

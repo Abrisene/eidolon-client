@@ -9,6 +9,7 @@
 
 import configQueries from './queries.config';
 import userQueries from './queries.user';
+import storeQueries from './queries.storefront';
 
 /**
  # Module Exports
@@ -17,4 +18,5 @@ import userQueries from './queries.user';
  export default {
    ...configQueries,
    ...userQueries,
+   ...storeQueries,
  };
