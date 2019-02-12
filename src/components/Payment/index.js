@@ -8,9 +8,13 @@
  */
 
 import CheckoutForm from './CheckoutForm';
+import CheckoutModal from './CheckoutModal';
 
 /**
  # Module Exports
  */
 
-export { CheckoutForm };
+export {
+  CheckoutForm,
+  CheckoutModal,
+};

@@ -1,0 +1,33 @@
+.c-modal {
+  .c-modal--overlay {
+    z-index: 2000;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .c-modal--content {
+    position: absolute;
+    top: 13vh;
+    left: 12px;
+    right: 12px;
+    // bottom: 40px;
+    // border: 1px solid #ccc;
+    background: #fff;
+    overflow: scroll !important;
+    
+    // -webkit-overflow-scrolling: touch;
+    // border-radius: 4px;
+    outline: none;
+    // padding: 20px;
+    
+  }
+}
+
+.c-modal--body-open {
+// .c--modal-html-open {
+  overflow: hidden;
+}

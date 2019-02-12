@@ -7,7 +7,7 @@
  # Module Imports
  */
 
-import React, { Component, Suspense } from 'react';
+import React from 'react';
 import { useMutation } from 'react-apollo-hooks';
 
 import queries from '../../queries';
@@ -36,7 +36,7 @@ const NavAuth = ({ user }) => {
 const ButtonLogout = ({ children }) => {
   const logoutUser = useMutation(queries.M_USER_LOGOUT, { refetchQueries: [{ query: queries.Q_USER_CURRENT }]});
   return (
-    <Button onClick={() => logoutUser()} outline danger>
+    <Button onClick={logoutUser} outline danger>
       {children ? children : 'Logout'}
     </Button>
   )

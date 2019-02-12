@@ -1,15 +1,14 @@
 /*
- # ViewLogin.js
- # Login View Component
+ # AuthRecover.js
+ # Password Recovery Form
  */
 
 /**
  # Module Imports
  */
 
-import React, { Component } from 'react';
-// import { Link } from "react-router-dom";
-import { Mutation } from "react-apollo";
+import React, { useState } from 'react';
+import { useMutation } from 'react-apollo-hooks';
 
 import queries from '../../../queries';
 
@@ -20,58 +19,50 @@ import { Button, Input } from '../../Bootstrap';
  */
 
 
-class AuthForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-    };
+function AuthRecover () {
+  // State
+  const [email, setEmail] = useState('');
+  const [requested, setRequested] = useState(false);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  // Mutation
+  const input = { email };
+  const requestReset = useMutation(queries.M_USER_RECOVER, { variables: { input }, update: () => setRequested(true) });
 
-  handleChange(key, value) {
-    this.setState((state) => ({ [key]: value }));
-  }
+  return (
+    <div id="c-pane-auth--recover" className="col-md-12">
+      { !requested ? <ResetRequestForm setEmail={setEmail} requestReset={requestReset} /> : <RequestSent />}
+    </div>
+  );
+}
 
-  handleSubmit(onSubmit) {
-    const { email } = this.state;
-    if (onSubmit) onSubmit({ email });
-  }
+function ResetRequestForm ({setEmail, requestReset}) {
+  return (
+    <form>
+      <Input
+        id="f-input-email"
+        type="email"
+        label="Email"
+        placeholder="Email"
+        onChange={setEmail}
+        validate
+      />
+      <Button onClick={requestReset}>
+        Request Reset Email
+      </Button>
+    </form>
+  );
+}
 
-  render() {
-    return (
-      <div id="c-pane-auth-recover" className="col-md-12">
-        <Mutation mutation={queries.M_USER_RECOVER}>
-          {(requestPasswordReset, { data }) => {
-            console.log(data);
-            const requested = data ? data.requestPasswordReset : false;
-            if (requested) return <h4 className="mt-5">Please check your email shortly for a password reset link.</h4>
-            return (
-              <form>
-                <Input
-                  id="f-input-email"
-                  type="email"
-                  label="Email"
-                  placeholder="Email"
-                  onChange={(v) => this.handleChange('email', v)}
-                  validate
-                />
-                <Button onClick={() => this.handleSubmit((input) => requestPasswordReset({ variables: { input }}))}>
-                  Request Reset Email
-                </Button>
-              </form>
-            )
-          }}
-        </Mutation>
-      </div>
-    );
-  }
+function RequestSent () {
+  return (
+    <h4 className="mt-5">
+      Please check your email shortly for a password reset link.
+    </h4>
+  );
 }
 
 /**
  # Module Exports
  */
 
-export default AuthForm;
+export default AuthRecover;

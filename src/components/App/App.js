@@ -49,7 +49,7 @@ const Admin = () => <span>Admin</span>
 
 const App = () => {
   const { data, error } = useQuery(queries.Q_APP_CONFIG);
-  if (error) return <div>`Error: ${error.message}`</div>
+  if (error) return <div>{`Error: ${error.message}`}</div>
   return (
     <Suspense fallback={<div>Loading</div>}>
       <Layout {...data} />

@@ -19,6 +19,7 @@ import { Container } from '../../Bootstrap';
  */
 
 const ViewAuth = ({ id, className, type = 'login', keys }) => {
+  const register = type === 'register';
   const i = id || `c-view--${type}`;
   const classes = className || `c-view--${type}`;
   let titleText;
@@ -43,7 +44,7 @@ const ViewAuth = ({ id, className, type = 'login', keys }) => {
         </div>
         <div className="col-md-8 mb-4">
           <div className="row ml-2">
-            <AuthEmail type={type} />
+            <AuthEmail register={register} />
           </div>
         </div>
       </div>
