@@ -32,7 +32,7 @@ const addMessage = (message, user) => {
  */
 
 const ViewChat = ({ id, className, config, user }) => {
-  const i = id || `c-view--chat`;
+  const i = id || `c-view c-view--chat`;
   const classes = className || `c-view--chat`;
 
   return (

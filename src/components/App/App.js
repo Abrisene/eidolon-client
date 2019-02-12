@@ -13,12 +13,12 @@ import { useQuery } from 'react-apollo-hooks';
 
 import queries from '../../queries';
 
-import { ViewAuth, ViewRecover, ViewStore, ViewChat } from '../Views';
+import { ViewAuth, ViewRecover, ViewStore, ViewChat, ViewStudio } from '../Views';
 import { AuthVisible } from '../Auth';
 
 import AppNavbar from './AppNavbar';
 
-import logo from './logo.svg';
+import logo from './app.logo.dark.png';
 
 /**
  # Constants
@@ -50,21 +50,16 @@ const Admin = () => <span>Admin</span>
 const App = () => {
   const { data, error } = useQuery(queries.Q_APP_CONFIG);
   if (error) return <div>{`Error: ${error.message}`}</div>
-  return (
-    <Suspense fallback={<div>Loading</div>}>
-      <Layout {...data} />
-    </Suspense>
-  );
-};
-
-const Layout = ({ config = null, user = null, keys = null }) => {
+  const { config, user } = data;
   const title = config ? config.name : undefined;
   return (
     <div className="app--layout">
       <AppNavbar title={title} logo={logo} config={config} user={user} navLinks={links}>
       </AppNavbar>
       <main id="app--main" className="app--main">
-        <Routes config={config} user={user} keys={config.keys} />
+        <Suspense fallback={<ViewStudio />}>
+          <Routes config={config} user={user} keys={config.keys} />
+        </Suspense>
       </main>
     </div>
   );
@@ -86,7 +81,7 @@ const Routes = ({ config = null, user = null, keys = null }) => {
         <Route path="/chat" render={() => <ViewChat config={config} user={user} />} />
       </AuthVisible>
       <AuthVisible user={user} roles="admin">
-        <Route path="/studio" component={Studio} />
+        <Route path="/studio" render={() => <ViewStudio config={config} user={user} />} />
         <Route path="/admin" component={Admin} />
       </AuthVisible>
     </div>

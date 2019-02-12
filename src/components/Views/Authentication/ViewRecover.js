@@ -16,7 +16,7 @@ import AuthRecover from './AuthRecover';
  */
 
 const ViewRecover = ({ id, className, type = 'password' }) => {
-  const i = id || `c-view--recover`;
+  const i = id || `c-view c-view--recover`;
   const classes = className || `c-view--recover`;
   return (
     <div id={i} className={classes}>

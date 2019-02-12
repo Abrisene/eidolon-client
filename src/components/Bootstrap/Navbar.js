@@ -10,7 +10,7 @@
 import React from 'react';
 import { Link, NavLink as RouterNavLink } from "react-router-dom";
 
-import './Navbar.css';
+import './Navbar.scss';
 
 /**
  # Component
@@ -21,7 +21,7 @@ const NavBrand = ({ logo, title }) => {
       <div className="col-3 col-lg-2">
         <Link className="navbar-brand" to="/">
           { logo ? <img src={logo} className="brand-logo" alt="logo" /> : null }
-          { title ? <span>{title}</span> : <span>&nbsp;</span> }
+          { title ? <span className="brand-title">{title}</span> : <span>&nbsp;</span> }
         </Link>
       </div>
   )

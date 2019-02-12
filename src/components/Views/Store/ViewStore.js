@@ -26,7 +26,7 @@ import './Modal.scss';
 
 const ViewStore = ({ id, className, config }) => {
   // Styling
-  const i = id || `c-view--store`;
+  const i = id || `c-view c-view--store`;
   const classes = className || `c-view--store`;
 
   // State

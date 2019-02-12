@@ -20,7 +20,7 @@ import { Container } from '../../Bootstrap';
 
 const ViewAuth = ({ id, className, type = 'login', keys }) => {
   const register = type === 'register';
-  const i = id || `c-view--${type}`;
+  const i = id || `c-view c-view--${type}`;
   const classes = className || `c-view--${type}`;
   let titleText;
 

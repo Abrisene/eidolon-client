@@ -1,0 +1,20 @@
+$logo-size: 28px;
+$logo-background: rgba(255, 255, 255, 0.4);
+
+.brand-logo {
+  max-height: $logo-size;
+  max-width: $logo-size;
+  min-height: $logo-size;
+  min-width: $logo-size;
+
+  background: $logo-background;
+  border-radius: 50%;
+  padding: 0.1rem;
+
+  margin-top: -0.25rem;
+  margin-right: 0.75rem;
+}
+
+.brand-title {
+  font-size: 1.28rem;
+}

@@ -53,14 +53,13 @@ const CheckoutModal = ({ sku = {}, setPurchaseSku }) => {
           <div className="mt-5">&nbsp;</div>
           <div className="mt-5">&nbsp;</div>
           <div className="mt-5">&nbsp;</div>
-          <div className="row mt-5 bg-light">
-            <div className="container-fluid">
-              <Elements>
-                <CheckoutForm className="" sku={sku} amount={sku.price} />
-              </Elements>
-            </div>
-          </div>
+          
         </Container>
+        <div className="row mt-5 bg-light">
+          <Elements>
+            <CheckoutForm className="" sku={sku} amount={sku.price} />
+          </Elements>
+        </div>
       </ContainerHero>
     </Modal>
   );

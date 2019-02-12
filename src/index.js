@@ -16,7 +16,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import  './themes';
-import './index.css';
+import './index.scss';
 import { App } from './components';
 
 import * as serviceWorker from './serviceWorker';
@@ -39,7 +39,7 @@ const Root = () => (
   <ApolloProvider client={client}>
     <ApolloHooksProvider client={client}>
       <Router>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={App}>
           <App />
         </Suspense>
       </Router>

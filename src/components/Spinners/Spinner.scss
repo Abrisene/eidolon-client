@@ -1,0 +1,59 @@
+$color-foreground-default: white;
+$color-background-default: rgba(255, 255, 255, 0.2);
+
+$color-foreground-light: white;
+$color-background-light: rgba(255, 255, 255, 0.2);
+
+$color-foreground-dark: black;
+$color-background-dark: rgba(0, 0, 0, 0.2);
+
+$width-default: 1.1em;
+$width-thin: 0.2rem;
+$width-thick: 2rem;
+
+.c-loader {
+  width: 10em;
+  height: 10em;
+
+  margin: 60px auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+
+  border-radius: 50%;
+  border-style: solid;
+  border-width: $width-default;
+  border-color: $color-background-default;
+  border-left-color: $color-foreground-default;
+
+  filter: blur(0.03rem);
+  transform: translateZ(0);
+  animation: load 1.1s infinite linear;
+
+  &.light {
+    border-color: $color-background-light;
+    border-left-color: $color-foreground-light;
+  }
+  &.dark {
+    border-color: $color-background-dark;
+    border-left-color: $color-foreground-dark;
+  }
+
+  &.thin {
+    border-width: $width-thin;
+  }
+  &.thick {
+    border-width: $width-thick;
+  }
+}
+
+@keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
