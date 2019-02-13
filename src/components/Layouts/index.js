@@ -12,6 +12,7 @@
 
 import { LayoutTopNav } from './Nav';
 import { ContainerHero} from './Hero';
+import { Sidebar} from './Sidebar';
 
 /**
  # Module Exports
@@ -25,4 +26,5 @@ import { ContainerHero} from './Hero';
 export {
   LayoutTopNav,
   ContainerHero,
+  Sidebar,
 }

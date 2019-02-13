@@ -1,5 +1,26 @@
 $logo-size: 28px;
 $logo-background: rgba(255, 255, 255, 0.4);
+$logo-background-light: rgba(255, 255, 255, 0.8);
+
+$brand-hover-color: white;
+
+.navbar-brand {
+
+  &:hover {
+    .brand-title {
+      color: $brand-hover-color;
+    }
+
+    .brand-logo {
+      background: $logo-background-light;
+    }
+  }
+}
+
+.brand-title {
+  font-size: 1.28rem;
+  transition: color 0.25s ease-in-out;
+}
 
 .brand-logo {
   max-height: $logo-size;
@@ -13,8 +34,13 @@ $logo-background: rgba(255, 255, 255, 0.4);
 
   margin-top: -0.25rem;
   margin-right: 0.75rem;
+
+  transition: background 0.25s ease-in-out; 
+
+  &:hover {
+    background: $logo-background-light;
+    // box-shadow:
+  }
 }
 
-.brand-title {
-  font-size: 1.28rem;
-}
+

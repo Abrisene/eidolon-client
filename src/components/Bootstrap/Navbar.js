@@ -1,6 +1,6 @@
 /*
  # Bootstrap/Navbar.js
- # React Component Index
+ # Bootstrap Navbar Component
  */
 
 /**
@@ -8,7 +8,9 @@
  */
 
 import React from 'react';
-import { Link, NavLink as RouterNavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import NavList from './NavList';
 
 import './Navbar.scss';
 
@@ -27,39 +29,16 @@ const NavBrand = ({ logo, title }) => {
   )
 };
 
-const NavList = ({ navLinks }) => {
-  const links = navLinks || [];
-  return (
-    <div className="collapse navbar-collapse">
-      <ul className="navbar-nav mr-auto">
-        {
-          links.map((link, id) => {
-            return <NavLink to={link.to} key={id}>{link.name}</NavLink>
-          })
-        }
-      </ul>
-    </div>
-  );
-}
-
-const NavLink = ({ children, to }) => {
-  return (
-    <li className="nav-item">
-      <RouterNavLink to={to} className="nav-link">{children}</RouterNavLink>
-    </li>
-  );
-};
-
 const Navbar = ({
   children,
-  navLinks,
+  // navLinks,
   dark,
   expand,
   fixed,
   fixedTop,
   fixedBottom,
-  title,
-  logo,
+  // title,
+  // logo,
   id,
   className,
 }) => {
@@ -73,8 +52,8 @@ const Navbar = ({
 
   return (
     <nav className={classes} id={id}>
-      {(title || logo) ? <NavBrand logo={logo} title={title} /> : null }
-      {navLinks ? <NavList navLinks={navLinks} /> : null }
+      {/* {(title || logo) ? <NavBrand logo={logo} title={title} /> : null } */}
+      {/* {navLinks ? <NavList navLinks={navLinks} /> : null } */}
       {children}
     </nav>
   );

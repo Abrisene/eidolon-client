@@ -12,7 +12,7 @@ import { useMutation } from 'react-apollo-hooks';
 
 import queries from '../../queries';
 
-import { Navbar, Button } from '../Bootstrap';
+import { Navbar, NavBrand, NavList, Button } from '../Bootstrap';
 import { AuthVisible } from '../Auth';
 
 /**
@@ -47,7 +47,7 @@ const ButtonLogout = ({ children }) => {
  */
 
 
-const AppNavbar = ({ children, title, logo, navLinks, user }) => {
+const AppNavbar = ({ children, title, logo, navLinks, user, onClickBrand }) => {
   const filterLinks = navLinks.filter((l) => {
     const authValid = !l.visible || (user && l.visible === 'auth') || (!user && l.visible === 'noauth');
     let roleValid = false;
@@ -57,6 +57,8 @@ const AppNavbar = ({ children, title, logo, navLinks, user }) => {
   });
   return (
     <Navbar dark fixed logo={logo} title={title} navLinks={filterLinks} >
+      <NavBrand title={title} logo={logo} onClick={onClickBrand} />
+      <NavList links={navLinks} collapse fill />
       {children}
       <NavAuth user={user} />
     </Navbar>

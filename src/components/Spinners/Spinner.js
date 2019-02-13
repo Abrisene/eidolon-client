@@ -17,8 +17,10 @@ function Spinner({
   className,
   light,
   dark,
+  red,
   thin,
   thick,
+  arc,
   thickness,
   primaryColor,
   secondaryColor,
@@ -27,8 +29,10 @@ function Spinner({
   let classes = 'c-loader';
   if (light) classes += ' light';
   if (dark) classes += ' dark';
+  if (red) classes += ' red';
   if (thin) classes += ' thin';
   if (thick) classes += ' thick';
+  if (arc) classes += ' arc';
   if (className) classes += ` ${className}`;
 
   // Build Styles

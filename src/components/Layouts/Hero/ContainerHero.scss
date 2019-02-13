@@ -1,8 +1,12 @@
-.c--container-hero {
+.c-container--hero {
   background-color: #000;
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
   /* padding: 1rem 1.25rem; */
   min-width: 25%;
+
+  &.blur {
+    filter: blur(1rem);
+  }
 }

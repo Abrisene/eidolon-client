@@ -17,6 +17,9 @@ import { ViewAuth, ViewRecover, ViewStore, ViewChat, ViewStudio } from '../Views
 import { AuthVisible } from '../Auth';
 
 import AppNavbar from './AppNavbar';
+import AppSidebar from './AppSidebar';
+
+// import { Sidebar } from '../Layouts';
 
 import logo from './app.logo.dark.png';
 
@@ -40,7 +43,6 @@ const links = [
 const Home = () => <span>Home</span>
 const About = () => <span>About</span>
 const Profile = () => <span>Profile</span>
-const Studio = () => <span>Studio</span>
 const Admin = () => <span>Admin</span>
 
 /**
@@ -56,6 +58,7 @@ const App = () => {
     <div className="app--layout">
       <AppNavbar title={title} logo={logo} config={config} user={user} navLinks={links}>
       </AppNavbar>
+      {/* <AppSidebar navLinks={links} /> */}
       <main id="app--main" className="app--main">
         <Suspense fallback={<ViewStudio />}>
           <Routes config={config} user={user} keys={config.keys} />

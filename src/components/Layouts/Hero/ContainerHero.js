@@ -11,7 +11,7 @@ import React from 'react';
 
 import { Container } from '../../Bootstrap';
 
-import './ContainerHero.css';
+import './ContainerHero.scss';
 
 /**
  # Component
@@ -28,6 +28,7 @@ const ContainerHero = ({
   offsetBottom,
   img,
   gradient,
+  blur,
   ...props,
 }) => {
 
@@ -39,8 +40,8 @@ const ContainerHero = ({
   if (offsetTop) styles.paddingTop = offsetTop;
   if (offsetBottom) styles.paddingBottom = offsetBottom;
 
-  let classes = 'c--container c--container-hero';
-
+  let classes = 'c-container c-container--hero';
+  if (blur) classes += ' blur';
   if (className) classes += ` ${className}`;
 
 

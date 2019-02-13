@@ -7,6 +7,8 @@ $color-background-light: rgba(255, 255, 255, 0.2);
 $color-foreground-dark: black;
 $color-background-dark: rgba(0, 0, 0, 0.2);
 
+$color-foreground-red: rgb(124, 33, 28);
+
 $width-default: 1.1em;
 $width-thin: 0.2rem;
 $width-thick: 2rem;
@@ -39,12 +41,23 @@ $width-thick: 2rem;
     border-left-color: $color-foreground-dark;
   }
 
+  &.red {
+    border-left-color: $color-foreground-red;
+  }
+
   &.thin {
     border-width: $width-thin;
   }
+
   &.thick {
     border-width: $width-thick;
   }
+
+  &.arc {
+    border-width: $width-thin;
+    border-left-width: $width-default;
+  }
+
 }
 
 @keyframes load {
