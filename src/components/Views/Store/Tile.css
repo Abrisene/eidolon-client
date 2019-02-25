@@ -15,16 +15,17 @@
 .c--tile h4,
 .c--tile h5 {
   color: rgba(256, 256, 256, 0.3);
+  backdrop-filter: blur(2px) brightness(70%) grayscale(25%);
   padding-left: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   margin-left: -1rem;
   -webkit-transition: color 0.5s ease-in-out, background 0.5s ease-in-out;
-  transition: color 0.5s ease-in-out, background 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+  transition: color 0.5s ease-in-out, backdrop-filter 0.5s ease-in-out, background 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }
 
 .c--tile:hover h4 {
-  background: rgba(0, 0, 0, 0.5);
+  /* background: rgba(0, 0, 0, 0.5); */
   color: #ffc107;
   -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.5);
@@ -44,6 +45,7 @@
   height: 100%;
   opacity: 0;
   overflow: hidden;
+  /* backdrop-filter: blur(2px) brightness(40%) grayscale(100%); */
   -webkit-transition: opacity 0.5s ease-in-out;
   transition: opacity 0.5s ease-in-out;
 }

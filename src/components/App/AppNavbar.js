@@ -15,6 +15,8 @@ import queries from '../../queries';
 import { Navbar, NavBrand, NavList, Button } from '../Bootstrap';
 import { AuthVisible } from '../Auth';
 
+import './App.scss';
+
 /**
  # Utility Components
  */
@@ -56,7 +58,7 @@ const AppNavbar = ({ children, title, logo, navLinks, user, onClickBrand }) => {
     return authValid && roleValid;
   });
   return (
-    <Navbar dark fixed logo={logo} title={title} navLinks={filterLinks} >
+    <Navbar className="c-navbar--app" dark fixed logo={logo} title={title} navLinks={filterLinks} >
       <NavBrand title={title} logo={logo} onClick={onClickBrand} />
       <NavList links={navLinks} collapse fill />
       {children}

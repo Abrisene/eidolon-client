@@ -32,6 +32,11 @@ function CheckoutForm({ stripe, sku, className, amount, buttonText, }) {
   // State
   const [retainSource, setRetainSource] = useState(false);
 
+  const handleResponse = async (proxy, result) => {
+    console.log(proxy);
+    console.log(result);
+  };
+
   // Mutation
   const submitPurchase = useMutation(queries.M_STORE_PURCHASE);
   const handleSubmit = async (e) => {
@@ -45,8 +50,8 @@ function CheckoutForm({ stripe, sku, className, amount, buttonText, }) {
       provider: 'stripe',
       retainSource,
     };
-    submitPurchase({ variables: { input }, refetchQueries: [{ query: queries.Q_USER_CURRENT }]});
-  }
+    submitPurchase({ variables: { input }, update: handleResponse, refetchQueries: [{ query: queries.Q_USER_CURRENT }]});
+  };
 
   // Display
   const amountText = amount ? ` $${amount / 100}` : '';

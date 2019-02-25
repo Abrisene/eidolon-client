@@ -18,17 +18,6 @@ import './Navbar.scss';
  # Component
  */
 
-const NavBrand = ({ logo, title }) => {
-  return (
-      <div className="col-3 col-lg-2">
-        <Link className="navbar-brand" to="/">
-          { logo ? <img src={logo} className="brand-logo" alt="logo" /> : null }
-          { title ? <span className="brand-title">{title}</span> : <span>&nbsp;</span> }
-        </Link>
-      </div>
-  )
-};
-
 const Navbar = ({
   children,
   // navLinks,
@@ -52,8 +41,6 @@ const Navbar = ({
 
   return (
     <nav className={classes} id={id}>
-      {/* {(title || logo) ? <NavBrand logo={logo} title={title} /> : null } */}
-      {/* {navLinks ? <NavList navLinks={navLinks} /> : null } */}
       {children}
     </nav>
   );

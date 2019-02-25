@@ -17,7 +17,7 @@ import { CheckoutForm, CheckoutModal } from '../../Payment';
 import { ContainerHero } from '../../Layouts';
 import HeroTileNarrow from './HeroTileNarrow';
 
-import './Tile.css';
+// import './Tile.css';
 import './Modal.scss';
 
 /**

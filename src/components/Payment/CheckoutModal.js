@@ -31,12 +31,13 @@ Modal.setAppElement('#root');
 
 const CheckoutModal = ({ sku = {}, setPurchaseSku }) => {
   const isOpen = sku.id !== undefined;
+  const clearSku = () => setPurchaseSku(undefined);
   return (
     <Modal
       isOpen={isOpen}
       shouldCloseOnEsc={true}
       shouldCloseOnOverlayClick={true}
-      onRequestClose={() => setPurchaseSku(undefined)}
+      onRequestClose={clearSku}
       portalClassName="c-modal"
       overlayClassName="c-modal--overlay"
       bodyOpenClassName="c-modal--body-open"
